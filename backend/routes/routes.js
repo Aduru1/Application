@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const SignUpTemplate =require('../models/SignUpModels')
-const multer = require('multer')
+
 
 router.post('/signup',(request,response)=>{
     const signedUpUser =new SignUpTemplate({
