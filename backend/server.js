@@ -7,24 +7,21 @@ const cors = require('cors')
 
 dotenv.config()
 
-mongoose.connect(process.env.DATABASE_ACCESS, ()=>console.log("DataBase Connected"))
+//mongoose.connect(process.env.DATABASE_ACCESS, ()=>console.log("DataBase Connected"))
 
 
 app.use(express.json()) //body parser  helps to our incomming and outgoing requests
 app.use(cors())
 app.use('/app',routeUrls)    //base url
-app.listen(4000,()=> console.log("server is up and running "))
+//app.listen(4000,()=> console.log("server is up and running "))
+
+const PORT = process.env.PORT || 4000;
+
+const CONNECTION_URL = 'mongodb+srv://user123:user123@mycluster.98tse.mongodb.net/users?retryWrites=true&w=majority';
 
 
+mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
+  .catch((error) => console.log(`${error} did not connect`));
 
-
-
-
-
-
-
-
-
-
-
-
+mongoose.set('useFindAndModify', false);
